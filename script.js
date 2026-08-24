@@ -1,34 +1,40 @@
 (function(){
   "use strict";
 
-  /* ---------- Entrance overlay ---------- */
+  /* ---------- Entrance overlay (home page only) ---------- */
   var entrance = document.getElementById('entrance');
   var enterBtn = document.getElementById('enter-btn');
   var body = document.body;
 
-  function enterSite(){
-    // Hook point: trigger the future animation + audio sequence here
-    // e.g. playIntroAnimation(); introAudio.play();
-    entrance.classList.add('hide');
+  if(entrance && enterBtn){
+    var enterSite = function(){
+      // Hook point: trigger the future animation + audio sequence here
+      // e.g. playIntroAnimation(); introAudio.play();
+      entrance.classList.add('hide');
+      body.classList.remove('locked');
+      setTimeout(function(){ entrance.style.display = 'none'; }, 1100);
+    };
+    enterBtn.addEventListener('click', enterSite);
+    entrance.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ enterSite(); }
+    });
+  } else {
+    // No entrance overlay on this page — make sure content isn't locked
     body.classList.remove('locked');
-    setTimeout(function(){ entrance.style.display = 'none'; }, 1100);
   }
-
-  enterBtn.addEventListener('click', enterSite);
-  entrance.addEventListener('keydown', function(e){
-    if(e.key === 'Enter' || e.key === ' '){ enterSite(); }
-  });
 
   /* ---------- Mobile nav ---------- */
   var navToggle = document.getElementById('navToggle');
   var navLinks = document.getElementById('navLinks');
-  navToggle.addEventListener('click', function(){
-    var isOpen = navLinks.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', isOpen);
-  });
-  navLinks.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){ navLinks.classList.remove('open'); });
-  });
+  if(navToggle && navLinks){
+    navToggle.addEventListener('click', function(){
+      var isOpen = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+    navLinks.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ navLinks.classList.remove('open'); });
+    });
+  }
 
   /* ---------- Ticker: duplicate content for seamless loop ---------- */
   var track = document.getElementById('tickerTrack');
@@ -36,18 +42,20 @@
 
   /* ---------- Scroll reveal ---------- */
   var reveals = document.querySelectorAll('.reveal');
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    reveals.forEach(function(el){ io.observe(el); });
-  } else {
-    reveals.forEach(function(el){ el.classList.add('in'); });
+  if(reveals.length){
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      reveals.forEach(function(el){ io.observe(el); });
+    } else {
+      reveals.forEach(function(el){ el.classList.add('in'); });
+    }
   }
 
   /* ---------- Card stack: slow, gentle tilt on mousemove (desktop only) ---------- */
@@ -85,29 +93,34 @@
   /* ---------- Our Plans: tab switching ---------- */
   var planTabs = document.querySelectorAll('.plan-tab');
   var planGroups = document.querySelectorAll('.plan-group');
-  planTabs.forEach(function(tab){
-    tab.addEventListener('click', function(){
-      var target = tab.getAttribute('data-target');
-      planTabs.forEach(function(t){ t.classList.remove('active'); });
-      planGroups.forEach(function(g){ g.classList.remove('active'); });
-      tab.classList.add('active');
-      var group = document.getElementById(target);
-      if(group){ group.classList.add('active'); }
+  if(planTabs.length){
+    planTabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        var target = tab.getAttribute('data-target');
+        planTabs.forEach(function(t){ t.classList.remove('active'); });
+        planGroups.forEach(function(g){ g.classList.remove('active'); });
+        tab.classList.add('active');
+        var group = document.getElementById(target);
+        if(group){ group.classList.add('active'); }
+      });
     });
-  });
+  }
 
   /* ---------- FAQ accordion ---------- */
   var faqItems = document.querySelectorAll('.faq-item');
-  faqItems.forEach(function(item){
-    var q = item.querySelector('.faq-q');
-    q.addEventListener('click', function(){
-      var isOpen = item.classList.contains('open');
-      faqItems.forEach(function(other){ other.classList.remove('open'); });
-      if(!isOpen){ item.classList.add('open'); }
+  if(faqItems.length){
+    faqItems.forEach(function(item){
+      var q = item.querySelector('.faq-q');
+      if(!q) return;
+      q.addEventListener('click', function(){
+        var isOpen = item.classList.contains('open');
+        faqItems.forEach(function(other){ other.classList.remove('open'); });
+        if(!isOpen){ item.classList.add('open'); }
+      });
     });
-  });
+  }
 
-  /* ---------- Marketing Badshah AI chat widget ---------- */
+  /* ---------- Marketing Badshah AI chat widget (every page) ---------- */
   var chatToggle = document.getElementById('chatToggle');
   var chatPanel = document.getElementById('chatPanel');
   var chatMessages = document.getElementById('chatMessages');
@@ -119,44 +132,62 @@
 
   if(chatToggle && chatPanel){
 
-    var TELEGRAM_URL = 'https://t.me/marketingbadshah';
-
     var CANNED = [
       {
         keys: ['package', 'plan', 'pricing', 'price', 'tier', 'bronze', 'silver', 'gold'],
-        reply: "We run Bronze, Silver and Gold tiers for Meta and Google Ads (₹9L, ₹15L and ₹30L monthly ad spend), plus Ad Account Replacement, SEO and AI Video packages. Check the \"Our Plans\" section above for the full breakdown."
+        reply: "We run Bronze, Silver and Gold tiers for Meta and Google Ads (\u20B99L, \u20B915L and \u20B930L monthly ad spend), plus WhatsApp API, SEO and AI Video packages. Check the \"Our Plans\" section for the full breakdown."
       },
       {
         keys: ['minimum', 'min spend', 'how much', 'budget', 'start with'],
-        reply: "Our Meta and Google Ads packages start at ₹9,00,000/month on Bronze and scale to ₹30,00,000/month on Gold. If your budget is smaller, our SEO or AI Video packages are a good place to start."
+        reply: "Our Meta and Google Ads packages start at \u20B99,00,000/month on Bronze and scale to \u20B930,00,000/month on Gold. If your budget is smaller, our SEO or AI Video packages are a good place to start."
       },
       {
         keys: ['fee', 'commission', 'management fee', 'charge'],
-        reply: "Management fees are ₹1,20,000/month on standard packages and ₹1,50,000/month on high-spend packages, plus a 9% vendor commission on total ad spend for Meta and Google Ads."
+        reply: "Management fees are \u20B91,20,000/month on standard packages and \u20B91,50,000/month on high-spend packages, plus a 9% vendor commission on total ad spend for Meta and Google Ads."
       },
       {
-        keys: ['api', 'replace', 'banned', 'restricted', 'account'],
-        reply: "Our Ad Account Replacement plans cover this — Starter gives you 5 replacements over 10 days, up to 10 replacements over 20 days on the Elite plan."
+        keys: ['whatsapp'],
+        reply: "Our WhatsApp API service covers a verified green-tick profile, broadcast messaging, catalog integration and automated chat flows \u2014 see the WhatsApp API page for details."
       },
       {
         keys: ['seo'],
-        reply: "SEO is quoted per brand based on your site and competition — it covers keyword strategy, on-page and technical fixes, backlinks, and monthly reporting."
+        reply: "SEO is quoted per brand based on your site and competition \u2014 it covers keyword strategy, on-page and technical fixes, backlinks, and monthly reporting."
       },
       {
         keys: ['video', 'ai video', 'celebrity'],
-        reply: "AI Video packages start at ₹5,000 for a single celebrity-style AI video and scale up to 5 videos with elite VFX on the Empire package."
+        reply: "AI Video packages start at \u20B95,000 for a single celebrity-style AI video and scale up to 5 videos with elite VFX on the top package."
+      },
+      {
+        keys: ['influencer'],
+        reply: "Our influencer marketing service handles creator sourcing, negotiation, briefing and performance tracking so partnerships actually move revenue."
+      },
+      {
+        keys: ['graphic', 'design'],
+        reply: "Our graphic design service covers ad creative, social templates and brand assets \u2014 see the Graphic Design page for the full scope."
+      },
+      {
+        keys: ['website', 'web dev', 'landing page'],
+        reply: "Our website development service builds landing pages and full websites designed to convert the traffic you're paying for."
+      },
+      {
+        keys: ['youtube'],
+        reply: "We don't run YouTube Ads \u2014 our Google Ads work is focused on Search. Happy to talk through Meta or Search Ads instead."
       },
       {
         keys: ['about', 'who are you', 'what do you do', 'services'],
-        reply: "We're Marketing Badshah — we build brands with quality leads, SEO, WhatsApp API, influencer marketing, AI videos, graphic design and website development, all under one roof."
+        reply: "We're Marketing Badshah \u2014 we build brands with quality leads, SEO, WhatsApp API, influencer marketing, AI videos, graphic design and website development, all under one roof."
+      },
+      {
+        keys: ['blog', 'article', 'read'],
+        reply: "We publish short, practical posts on the blog \u2014 worth a look if you want more detail before reaching out."
       },
       {
         keys: ['contact', 'human', 'talk to someone', 'reach', 'call', 'email'],
-        reply: "You can fill out the contact form on this page and we'll reply within 48 hours, or tap \"Chat with us on Telegram\" below for the fastest response."
+        reply: "You can fill out the contact form and we'll reply within 48 hours, or tap \"Chat with us on Telegram\" below for the fastest response."
       },
       {
         keys: ['hi', 'hello', 'hey'],
-        reply: "Hey! I'm the Marketing Badshah AI. Ask me about our packages, pricing, or services — or tap Telegram below to reach the team directly."
+        reply: "Hey! I'm the Marketing Badshah AI. Ask me about our packages, pricing, or services \u2014 or tap Telegram below to reach the team directly."
       }
     ];
 
@@ -173,7 +204,7 @@
     function findReply(text){
       var lower = text.toLowerCase();
       if(lower.indexOf('telegram') !== -1 || lower.indexOf('human') !== -1){
-        return "Tap \"Chat with us on Telegram\" below any time — a real person from the team will pick it up.";
+        return "Tap \"Chat with us on Telegram\" below any time \u2014 a real person from the team will pick it up.";
       }
       for(var i=0; i<CANNED.length; i++){
         var entry = CANNED[i];
@@ -189,8 +220,8 @@
       chatPanel.classList.add('open');
       chatPanel.setAttribute('aria-hidden', 'false');
       chatToggle.setAttribute('aria-expanded', 'true');
-      chatIconOpen.style.display = 'none';
-      chatIconClose.style.display = 'block';
+      if(chatIconOpen) chatIconOpen.style.display = 'none';
+      if(chatIconClose) chatIconClose.style.display = 'block';
       if(!greeted){
         greeted = true;
         setTimeout(function(){
@@ -202,8 +233,8 @@
       chatPanel.classList.remove('open');
       chatPanel.setAttribute('aria-hidden', 'true');
       chatToggle.setAttribute('aria-expanded', 'false');
-      chatIconOpen.style.display = 'block';
-      chatIconClose.style.display = 'none';
+      if(chatIconOpen) chatIconOpen.style.display = 'block';
+      if(chatIconClose) chatIconClose.style.display = 'none';
     }
 
     chatToggle.addEventListener('click', function(){
@@ -242,7 +273,7 @@
       e.preventDefault();
       var btn = form.querySelector('button[type="submit"]');
       var original = btn.textContent;
-      btn.textContent = 'Sent — we will reply within 48h';
+      btn.textContent = 'Sent \u2014 we will reply within 48h';
       btn.disabled = true;
       setTimeout(function(){ btn.textContent = original; btn.disabled = false; form.reset(); }, 3200);
     });
