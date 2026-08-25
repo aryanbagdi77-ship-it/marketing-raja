@@ -276,6 +276,32 @@ header.site-header{
 }
 .pcard:hover .card-link{ transform: translateX(4px); }
 
+/* --------------------------------- Results --------------------------------- */
+.metric-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.metric-card{
+  background: var(--bg-card); border: 1px solid var(--line); border-radius: 4px;
+  padding: 32px 26px; text-align:center;
+  transition: transform var(--dur-card) var(--ease-slow), border-color var(--dur-card) var(--ease-slow), box-shadow var(--dur-card) var(--ease-slow);
+}
+.metric-card:hover{ border-color: var(--gold-line); box-shadow: 0 26px 60px -20px rgba(0,0,0,.6); }
+.metric-card .icon{ width:32px; height:32px; margin: 0 auto 16px; color: var(--gold); }
+.metric-num{ font-family: var(--font-mono); font-size: 34px; color: var(--gold-light); }
+.metric-label{ font-size: 13px; color: var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-top: 8px; }
+.metric-note{ font-size: 12.5px; color: var(--muted); margin-top: 18px; }
+
+.industries{ margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--line); }
+.industries-row{ display:flex; flex-wrap:wrap; gap: 10px; }
+.industry-chip{
+  font-family: var(--font-mono); font-size: 12.5px; letter-spacing:.03em;
+  border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px;
+  color: var(--ink-dim);
+}
+.industry-chip-gaming{ border-color: var(--gold-line); color: var(--gold-light); }
+.industries-note{ margin-top: 18px; font-size: 13px; color: var(--muted); max-width: 640px; }
+
+@media (max-width: 900px){ .metric-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px){ .metric-grid{ grid-template-columns: 1fr; } }
+
 @media (max-width: 900px){ .card-stack{ grid-template-columns: 1fr; } }
 
 /* --------------------------------- Plans --------------------------------- */
