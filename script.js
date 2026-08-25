@@ -178,6 +178,14 @@
         reply: "We're Marketing Badshah \u2014 we build brands with quality leads, SEO, WhatsApp API, influencer marketing, AI videos, graphic design and website development, all under one roof."
       },
       {
+        keys: ['result', 'metric', 'roas', 'track record', 'case study', 'proof'],
+        reply: "We manage \u20B940 Cr+ in daily ad spend across accounts, with an average client ROAS of 3.4x over 600+ campaigns. Check the \"Results\" section for the full breakdown."
+      },
+      {
+        keys: ['casino', 'sportsbook', 'gambling', 'igaming', 'betting'],
+        reply: "Yes \u2014 we run marketing for licensed, regulated sportsbook and casino operators, alongside our D2C, real estate and fintech clients. All gaming work stays within each jurisdiction's advertising and compliance rules."
+      },
+      {
         keys: ['blog', 'article', 'read'],
         reply: "We publish short, practical posts on the blog \u2014 worth a look if you want more detail before reaching out."
       },
