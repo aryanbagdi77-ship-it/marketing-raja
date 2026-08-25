@@ -164,14 +164,17 @@ section[id], .partner-marquee-wrap, .gaming-sub{ scroll-margin-top: 96px; }
   .nav-links{
     position: fixed; inset: 0 0 0 auto; width: min(78vw, 340px);
     background: #0a0806; flex-direction:column; align-items:flex-start; gap:0;
-    padding: 100px 34px 40px;
+    padding: 90px 34px 40px;
     transform: translateX(100%);
     transition: transform .6s var(--ease-slow);
     border-left: 1px solid var(--gold-line);
+    z-index: 510;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .nav-links.open{ transform: translateX(0); }
-  .nav-links a{ padding: 16px 0; width:100%; border-bottom: 1px solid var(--line); }
-  .nav-links .btn{ margin-top: 20px; }
+  .nav-links a{ padding: 13px 0; width:100%; border-bottom: 1px solid var(--line); font-size: 12px; }
+  .nav-links .btn{ margin-top: 16px; }
 }
 
 /* ---------------------------------- Hero --------------------------------- */
