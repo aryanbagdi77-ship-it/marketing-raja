@@ -324,19 +324,35 @@ header.site-header{
   border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
   padding: 22px 0; overflow:hidden; background: var(--bg-alt);
 }
-.partner-track{ display:flex; width: max-content; animation: ticker-scroll 34s linear infinite; }
+.partner-track{ display:flex; align-items:center; width: max-content; animation: ticker-scroll 38s linear infinite; }
 .partner-track:hover{ animation-play-state: paused; }
 .partner-chip{
-  display:flex; align-items:center; gap: 12px;
-  font-family: var(--font-mono); font-size: 13px; letter-spacing:.04em; color: var(--ink-dim);
-  padding: 0 30px; white-space:nowrap;
-}
-.partner-mark{
-  width: 34px; height:34px; border-radius:50%;
-  border: 1px solid var(--gold-line);
   display:flex; align-items:center; justify-content:center;
-  font-family: var(--font-display); font-size: 12px; color: var(--gold-light);
+  width: 92px; height: 76px;
+  margin: 0 16px;
+  padding: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
   flex-shrink:0;
+  filter: grayscale(65%) brightness(0.92);
+  opacity: 0.82;
+  transition: filter .4s var(--ease-slow), opacity .4s var(--ease-slow), transform .4s var(--ease-slow), border-color .4s var(--ease-slow);
+}
+.partner-chip.wide{ width: 172px; }
+.partner-chip:hover{
+  filter: grayscale(0%) brightness(1);
+  opacity: 1;
+  transform: translateY(-4px);
+  border-color: var(--gold-line);
+}
+.partner-chip img{
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
 }
 
 @media (max-width: 900px){ .card-stack{ grid-template-columns: 1fr; } }
