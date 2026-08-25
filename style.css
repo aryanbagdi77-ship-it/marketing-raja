@@ -291,19 +291,53 @@ header.site-header{
 
 .gaming-callout{
   margin-top: 48px;
-  display:flex; align-items:flex-start; gap: 22px;
   padding: 32px 34px;
   border: 1px solid var(--gold-line);
   border-radius: 6px;
   background: linear-gradient(160deg, var(--bg-card), #0a0806);
 }
+.gaming-callout-head{ display:flex; align-items:flex-start; gap: 22px; }
 .gaming-callout .icon{ width:34px; height:34px; color: var(--gold); flex-shrink:0; margin-top:2px; }
 .gaming-callout h3{ font-size: 20px; margin-bottom: 10px; }
-.gaming-callout p{ color: var(--ink-dim); font-size: 14.5px; line-height:1.7; }
-@media (max-width: 600px){ .gaming-callout{ flex-direction:column; } }
+.gaming-callout-head p{ color: var(--ink-dim); font-size: 14.5px; line-height:1.7; }
+@media (max-width: 600px){ .gaming-callout-head{ flex-direction:column; } }
+
+.gaming-subgrid{
+  display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  margin-top: 30px; padding-top: 28px; border-top: 1px solid var(--line);
+}
+.gaming-sub svg{ width:26px; height:26px; color: var(--gold); margin-bottom: 12px; }
+.gaming-sub h4{ font-family: var(--font-display); font-size: 16px; margin-bottom: 6px; color: var(--gold-light); }
+.gaming-sub p{ font-size: 13.5px; color: var(--muted); line-height:1.6; }
+@media (max-width: 700px){ .gaming-subgrid{ grid-template-columns: 1fr; } }
 
 @media (max-width: 900px){ .metric-grid{ grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 500px){ .metric-grid{ grid-template-columns: 1fr; } }
+
+/* ----------------------------- Partner marquee ----------------------------- */
+.partner-marquee-wrap{ padding: 44px 0 0; }
+.partner-marquee-label{
+  text-align:center; font-family: var(--font-mono); font-size: 12px; letter-spacing:.1em; text-transform:uppercase;
+  color: var(--muted); margin-bottom: 26px;
+}
+.partner-marquee{
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  padding: 22px 0; overflow:hidden; background: var(--bg-alt);
+}
+.partner-track{ display:flex; width: max-content; animation: ticker-scroll 34s linear infinite; }
+.partner-track:hover{ animation-play-state: paused; }
+.partner-chip{
+  display:flex; align-items:center; gap: 12px;
+  font-family: var(--font-mono); font-size: 13px; letter-spacing:.04em; color: var(--ink-dim);
+  padding: 0 30px; white-space:nowrap;
+}
+.partner-mark{
+  width: 34px; height:34px; border-radius:50%;
+  border: 1px solid var(--gold-line);
+  display:flex; align-items:center; justify-content:center;
+  font-family: var(--font-display); font-size: 12px; color: var(--gold-light);
+  flex-shrink:0;
+}
 
 @media (max-width: 900px){ .card-stack{ grid-template-columns: 1fr; } }
 
