@@ -182,8 +182,8 @@
         reply: "We manage \u20B940 Cr+ in daily ad spend across accounts, with an average client ROAS of 3.4x over 600+ campaigns. Check the \"Results\" section for the full breakdown."
       },
       {
-        keys: ['casino', 'sportsbook', 'gambling', 'igaming', 'betting'],
-        reply: "Yes \u2014 we run marketing for licensed, regulated sportsbook and casino operators, alongside our D2C, real estate and fintech clients. All gaming work stays within each jurisdiction's advertising and compliance rules."
+        keys: ['casino', 'sportsbook', 'gambling', 'igaming', 'betting', 'sports', 'stocks', 'stock', 'trading', 'forex'],
+        reply: "Yes \u2014 Sports, Casino and Stocks are core verticals for us. We run marketing for licensed sportsbook and casino operators and for stock &amp; trading platforms, alongside our D2C, real estate and fintech clients, all within each jurisdiction's advertising and compliance rules."
       },
       {
         keys: ['blog', 'article', 'read'],
