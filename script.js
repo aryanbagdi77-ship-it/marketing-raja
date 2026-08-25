@@ -36,9 +36,11 @@
     });
   }
 
-  /* ---------- Ticker: duplicate content for seamless loop ---------- */
+  /* ---------- Ticker & partner marquee: duplicate content for seamless loop ---------- */
   var track = document.getElementById('tickerTrack');
   if(track){ track.innerHTML += track.innerHTML; }
+  var partnerTrack = document.getElementById('partnerTrack');
+  if(partnerTrack){ partnerTrack.innerHTML += partnerTrack.innerHTML; }
 
   /* ---------- Scroll reveal ---------- */
   var reveals = document.querySelectorAll('.reveal');
