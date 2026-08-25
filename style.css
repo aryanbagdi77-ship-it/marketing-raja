@@ -74,6 +74,8 @@ img{ max-width:100%; display:block; }
 .section-head{ max-width: 640px; margin-bottom: 64px; }
 .section-head h2{ font-size: clamp(32px, 4vw, 48px); line-height: 1.15; }
 .section-head .sub{ margin-top: 18px; color: var(--ink-dim); font-size: 17px; max-width: 520px; }
+.deco-strip{ display:flex; gap:16px; margin-top: 26px; }
+.deco-strip svg{ width: 26px; height:26px; color: var(--gold); opacity:.65; }
 
 .gold-text{
   background: var(--gold-grad-text);
@@ -195,6 +197,27 @@ header.site-header{
 @keyframes spin-slow{ to{ transform: rotate(360deg); } }
 .hero-emblem .crown-fixed{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
 .hero-emblem .crown-fixed svg{ width: 90px; animation:none; }
+
+/* ------------------------- Decorative accent icons ------------------------- */
+.hero-deco{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+.hero-deco .deco-icon{ position:absolute; color: var(--gold); opacity:.14; }
+.hero-deco .d1{ top: 8%;  left: 4%;  width: 86px; transform: rotate(-18deg); }
+.hero-deco .d2{ top: 68%; left: 8%;  width: 60px; transform: rotate(12deg); }
+.hero-deco .d3{ top: 14%; left: 46%; width: 46px; transform: rotate(8deg); opacity:.1; }
+.hero-deco .d4{ bottom: 10%; left: 38%; width: 70px; transform: rotate(-10deg); }
+.hero-deco .d5{ top: 22%; right: 3%; width: 64px; transform: rotate(16deg); opacity:.1; }
+.hero .hero-grid{ position: relative; z-index: 1; }
+
+.card-corner-mark{ position:absolute; top:16px; left:18px; width:22px; height:22px; color: var(--gold); opacity:.85; }
+
+.about-grid-wrap{ display:grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items:center; }
+.about-illustration{ position:relative; display:flex; align-items:center; justify-content:center; min-height: 280px; }
+.about-illustration svg{ width:100%; max-width: 320px; }
+@media (max-width: 900px){
+  .about-grid-wrap{ grid-template-columns: 1fr; }
+  .about-illustration{ order:-1; min-height:200px; }
+  .about-illustration svg{ max-width: 220px; }
+}
 
 @media (max-width: 900px){
   .hero-grid{ grid-template-columns: 1fr; }
